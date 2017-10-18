@@ -9,7 +9,7 @@ const path = require('path');
 module.exports = {
   devtool: 'source-map',
   entry: [
-    __dirname + '/src/app.js'
+    __dirname + '/scripts/app.js'
   ],
   output: {
       path: __dirname + '/build',
