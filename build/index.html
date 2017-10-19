@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
   <head>
-    <title>My React From The Scratch</title>
+    <title>Launch Tracker</title>
     <meta charset="utf-8">
-    <meta content="author" description="Pusher of codes">
+    <meta content="author" description="Upcoming launches">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   </head>
   <body>
-    <div id="root">test</div>
+    <h1 class="title">Launch Tracker</h1>
+    <table st-table="launches" class="table table-striped" ng-controller="landing">
+      <thead>
+        <tr class="row-header">
+          <th>Launch Date</th>
+          <th>Rocket</th>
+          <th>Agency</th>
+          <th>Location</th>
+          <th>Mission Wiki</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="launch in launches">
+          <td>
+            <p>{{ launch.date }}</p>
+            <p>Time: {{ launch.timeOfLaunch }}</p>
+
+          </td>
+          <td>
+            <a href="{{launch.rocket.wiki }}">{{ launch.rocket.name }}</p>
+          </td>
+          <td>
+            <div ng-repeat="agency in launch.agencies">
+              <a href="{{ agency.wiki }}">{{agency.name}}</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>  
+      
+    </table>
     <script type="text/javascript" src="bundle.js"></script>
+    <script type="text/javascript" src="/lib/smart-table.min.js"></script>
   </body>
 </html>

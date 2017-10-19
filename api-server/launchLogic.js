@@ -21,15 +21,16 @@ const apiLogic = (date) => {
       const launchIdsMerge = 'launchid=' + launches.map(launch => launch.id).join('&launchid=');
       const missionsSelected = await axios.get(baseUrl.mission + launchIdsMerge + '&mode=verbose&limit=300').then(result => result.data.missions); //fields selector param doesn't work in api
       const rocketIdsMerge = 'id=' + launches.map(launch => launch.rocketid).join('&id=');
-      const rockets = await axios.get(baseUrl.rocket + rocketIdsMerge + '&mode=verbose&limit=300').then(result => result.data.rockets); //fields selector param doesn't work in api
+      const rockets = await axios.get(baseUrl.rocket + rocketIdsMerge + '&mode=verbose&limit=300').then(result => result.data.rockets); //fields selector param doesn't work in api      
+      const agencies = await axios.get(baseUrl.agencies + "limit=300").then(result => result.data.agencies);
       const locationIdsMerge = 'id=' + launches.map(launch => launch.locationid).join('&id=');
       const locations = await axios.get(baseUrl.pad + locationIdsMerge + '&limit=300').then(result => result.data.pads);
-      
       try {
-        const parsedApiData = helper.parseApi(launches,locations,missionsSelected,rockets);
+        const parsedApiData = helper.parseApi(launches, locations, missionsSelected, rockets, agencies);
         return parsedApiData;
       } catch (err) {
-        console.log(err);
+        // console.log(err);
+        console.log('err');
         next(err);
       }
     }
@@ -38,7 +39,7 @@ const apiLogic = (date) => {
       return apiData;
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
       next(err); 
     })
   }

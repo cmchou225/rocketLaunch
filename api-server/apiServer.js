@@ -11,18 +11,14 @@ const apiServer = (PORT) => {
   app.listen(PORT);
 };
 
-app.get('/', (req, res) => {
+app.get('/data', (req, res) => {
   date.now = Date.now();
   launchLogic.apiLogic(date)
   .then(result => {
     date.lastUpdate = Date.now();
-    console.log(date);
     res.send(result);
   })
 });
-
-
-
 module.exports.apiServer = apiServer;
 
 

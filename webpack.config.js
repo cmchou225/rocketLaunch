@@ -1,11 +1,5 @@
 const path = require('path');
 
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-//   template: __dirname + '/src/app.html',
-//   filename: 'index.html',
-//   inject: 'body'
-// })
 module.exports = {
   devtool: 'source-map',
   entry: [
@@ -17,8 +11,20 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+      { test: /\.js$/, 
+        exclude: /node_modules/, 
+        use: [
+          { loader: "babel-loader" }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: "style-loader" }, 
+          { loader: "css-loader" },
+          { loader: "sass-loader" }
+        ]
+      }
     ]
   }
- //plugins: [HtmlWebpackPluginConfig]
 }
