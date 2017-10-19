@@ -29,9 +29,7 @@ const apiLogic = (date) => {
         const parsedApiData = helper.parseApi(launches, locations, missionsSelected, rockets, agencies);
         return parsedApiData;
       } catch (err) {
-        // console.log(err);
-        console.log('err');
-        next(err);
+        console.log(err);
       }
     }
     return getApiData().then(launches => {
@@ -39,8 +37,7 @@ const apiLogic = (date) => {
       return apiData;
     })
     .catch(err => {
-      // console.log(err);
-      next(err); 
+      console.log(err);
     })
   }
 };

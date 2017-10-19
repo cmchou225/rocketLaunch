@@ -5,39 +5,52 @@
     <meta charset="utf-8">
     <meta content="author" description="Upcoming launches">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    
   </head>
   <body>
-    <h1 class="title">Launch Tracker</h1>
-    <table st-table="launches" class="table table-striped" ng-controller="landing">
-      <thead>
-        <tr class="row-header">
-          <th>Launch Date</th>
-          <th>Rocket</th>
-          <th>Agency</th>
-          <th>Location</th>
-          <th>Mission Wiki</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="launch in launches">
-          <td>
-            <p>{{ launch.date }}</p>
-            <p>Time: {{ launch.timeOfLaunch }}</p>
-
-          </td>
-          <td>
-            <a href="{{launch.rocket.wiki }}">{{ launch.rocket.name }}</p>
-          </td>
-          <td>
-            <div ng-repeat="agency in launch.agencies">
-              <a href="{{ agency.wiki }}">{{agency.name}}</a>
-            </div>
-          </td>
-        </tr>
-      </tbody>  
-      
-    </table>
+    <div id="launchTitle" class="text-center">
+      <h1 class="title">Launch Tracker</h1>
+    </div>
+    <div></div>
+    <div class="col-sm-6 checkbox">
+      <label>
+        <input ng-model="confirmed" type="checkbox" value=""> Confirmed times only 
+      </label>
+    </div>
+    <div class="my-table">
+      <table st-table="launches" class="table table-striped" ng-controller="landing">
+        <thead>
+          <tr class="row-header">
+            <th>Launch Date</th>
+            <th>Rocket</th>
+            <th>Agency</th>
+            <th>Location</th>
+            <th>Mission Wiki</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  ng-class="{confirmed: launch.status === true}" class="unconfirmed" ng-repeat="launch in launches">
+            <td>
+              <p>{{ launch.date }}</p>
+              <p>Time: {{ launch.timeOfLaunch }}</p>
+            </td>
+            <td>
+              <a href="{{launch.rocket.wiki }}">{{ launch.rocket.name }}</p>
+            </td>
+            <td>
+              <div ng-repeat="agency in launch.agencies">
+                <a href="{{ agency.wiki }}">{{agency.name}}</a>
+              </div>
+            </td>
+            <td>{{ launch.location }} </td>
+            <td>
+              <a ng-if="launch.wiki !== 'N/A'" href="{{ launch.wiki }}">Available</a>
+            </td>
+          </tr>
+        </tbody>  
+      </table>
+    </div>  
     <script type="text/javascript" src="bundle.js"></script>
     <script type="text/javascript" src="/lib/smart-table.min.js"></script>
   </body>

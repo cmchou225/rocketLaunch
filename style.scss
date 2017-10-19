@@ -1,3 +1,9 @@
-
-
-
+thead{
+  background-color: rgb(213, 237, 247)
+}
+body div.my-table tbody tr.confirmed.unconfirmed {
+  background-color: rgb(204, 243, 204);
+}
+body div.my-table tbody tr.unconfirmed {
+  background-color: rgb(247, 226, 226)
+}
