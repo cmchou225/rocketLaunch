@@ -11,6 +11,7 @@ const devServer = (PORT) => {
     }
   });
   server.listen(PORT, 'localhost');
+  console.log(`listening on port ${PORT}`)
 };
 
 module.exports.devServer = devServer;

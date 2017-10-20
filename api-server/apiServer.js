@@ -18,6 +18,10 @@ app.get('/data', (req, res) => {
     date.lastUpdate = Date.now();
     res.send(result);
   })
+  .catch( err => {
+    console.log(err);
+    res.status(500).send('Error obtaining data from api server');
+  })
 });
 module.exports.apiServer = apiServer;
 

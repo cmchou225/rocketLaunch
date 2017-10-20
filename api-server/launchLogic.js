@@ -27,18 +27,13 @@ const apiLogic = (date) => {
       const locations = await axios.get(baseUrl.pad + locationIdsMerge + '&limit=300').then(result => result.data.pads);
       try {
         const parsedApiData = helper.parseApi(launches, locations, missionsSelected, rockets, agencies);
-        return parsedApiData;
+        apiData = parsedApiData;
+        return apiData;
       } catch (err) {
-        console.log(err);
+        return err;
       }
     }
-    return getApiData().then(launches => {
-      apiData = launches
-      return apiData;
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    return getApiData();
   }
 };
 
