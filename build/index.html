@@ -12,44 +12,49 @@
     <div id="launchTitle" class="text-center">
       <h1 class="title">Launch Tracker</h1>
     </div>
-    <div></div>
-    <div class="col-sm-6 checkbox">
-      <label>
-        <input ng-model="confirmed" type="checkbox" value=""> Confirmed times only 
-      </label>
-    </div>
-    <div class="my-table">
-      <table st-table="launches" class="table table-striped" ng-controller="landing">
-        <thead>
-          <tr class="row-header">
-            <th>Launch Date</th>
-            <th>Rocket</th>
-            <th>Agency</th>
-            <th>Location</th>
-            <th>Mission Wiki</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr  ng-class="{confirmed: launch.status === true}" class="unconfirmed" ng-repeat="launch in launches">
-            <td>
-              <p>{{ launch.date }}</p>
-              <p>Time: {{ launch.timeOfLaunch }}</p>
-            </td>
-            <td>
-              <a href="{{launch.rocket.wiki }}">{{ launch.rocket.name }}</p>
-            </td>
-            <td>
-              <div ng-repeat="agency in launch.agencies">
-                <a href="{{ agency.wiki }}">{{agency.name}}</a>
-              </div>
-            </td>
-            <td>{{ launch.location }} </td>
-            <td>
-              <a ng-if="launch.wiki !== 'N/A'" href="{{ launch.wiki }}">Available</a>
-            </td>
-          </tr>
-        </tbody>  
-      </table>
+    <div ng-controller="landing">
+      <div ng-show="error"> Error fetching data, try again later</div>
+      <div ng-show="success">
+        <div class="col-sm-6 checkbox">
+            <label>
+              <input ng-model="confirmed" type="checkbox"> Confirmed times only 
+            </label>
+        </div>
+        <div class="my-table">
+          <table st-table="launches" class="table table-striped" >
+            <thead>
+              <tr class="row-header">
+                <th>Launch Date</th>
+                <th>Rocket | Configuration</th>
+                <th>Agency</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  ng-class="{confirmed: launch.status === true}" class="unconfirmed" ng-repeat="launch in launches">
+                <td>
+                  <p>{{ launch.date }}</p>
+                  <p>Time: {{ launch.timeOfLaunch }}</p>
+                </td>
+                <td>
+                  <a href="{{launch.rocket.wiki }}">{{ launch.rocket.name }}</p>
+                </td>
+                <td>
+                  <div ng-repeat="agency in launch.agencies">
+                    <a href="{{ agency.wiki }}">{{agency.name}}</a>
+                  </div>
+                </td>
+                <td>
+                  <div> 
+                    <a href="{{launch.location.wikiURL}}">{{ launch.location.name }}</p>
+                    <a href="{{launch.location.mapURL}}">Map</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>  
+          </table>
+        </div>
+      </div>
     </div>  
     <script type="text/javascript" src="bundle.js"></script>
     <script type="text/javascript" src="/lib/smart-table.min.js"></script>

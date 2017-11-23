@@ -16,7 +16,9 @@ angular.module('app', ['smart-table'])
       })
       launchesConfirmed = launchesAll.filter(launch => launch.status === true);
       $scope.launches = launchesAll;
+      $scope.success = true;
     })
+    .catch(err => $scope.error = true);
     $scope.$watch('confirmed', (newVal, oldVal) => {
       $scope.launches = newVal ? launchesConfirmed : launchesAll;
     })    
