@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const launchLogic = require('./launchLogic.js');
+const launchLogic = require('./logic/launchLogic.js');
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.get('/data', (req, res) => {
     res.send(result);
   })
   .catch( err => {
-    console.log(err);
+    console.log(err.response.data);
     res.status(500).send('Error obtaining data from api server');
   })
 });
